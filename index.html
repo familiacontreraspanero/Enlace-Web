@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Abrir Puerta - Sweet Apartment</title>
   <style>
     body {
@@ -111,9 +111,10 @@
 </head>
 <body>
   <div class="container">
-
     <div class="booking-link">
-      <strong>Bienvenido al <a href="https://www.booking.com/hotel/es/sweet-apartment-malaga12.es.html" target="_blank">Sweet Apartment</a></strong>
+      <strong id="bienvenida">
+        Bienvenido al <a href="https://www.booking.com/hotel/es/sweet-apartment-malaga12.es.html" target="_blank">Sweet Apartment</a>
+      </strong>
     </div>
 
     <h1 id="titulo">Para abrir el Portal</h1>
@@ -138,12 +139,41 @@
   </div>
 
   <script>
+    const textos = {
+      es: {
+        bienvenida: 'Bienvenido al <a href="https://www.booking.com/hotel/es/sweet-apartment-malaga12.es.html" target="_blank">Sweet Apartment</a>',
+        titulo: "Para abrir el Portal",
+        paso1: "Llama al 1ºF en el portal del Edificio Caracola",
+        paso2: 'Tras llamar, pulsa el botón "Abrir Puerta"',
+        direccion: "Dirección en Google Maps:",
+        boton: "Abrir Puerta",
+        enviando: "🔄 Enviando orden...",
+        abierto: "✅ ¡Puerta abierta!",
+        error: "❌ No se pudo abrir.",
+        conexion: "⚠️ Error de conexión."
+      },
+      en: {
+        bienvenida: 'Welcome to <a href="https://www.booking.com/hotel/es/sweet-apartment-malaga12.en.html" target="_blank">Sweet Apartment</a>',
+        titulo: "To open the gate",
+        paso1: "Call 1ºF at the entrance of Edificio Caracola",
+        paso2: 'After calling, press the "Open Gate" button',
+        direccion: "Address on Google Maps:",
+        boton: "Open Gate",
+        enviando: "🔄 Sending request...",
+        abierto: "✅ Gate opened!",
+        error: "❌ Could not open.",
+        conexion: "⚠️ Connection error."
+      }
+    };
+
+    let idiomaActual = "es";
+
     async function abrirPuerta() {
       const boton = document.getElementById("abrirBtn");
       const mensaje = document.getElementById("respuesta");
 
       boton.disabled = true;
-      mensaje.innerText = "🔄 Enviando orden...";
+      mensaje.innerText = textos[idiomaActual].enviando;
 
       try {
         const response = await fetch("https://nuki-opener-arkm.vercel.app/api/abrir", {
@@ -151,12 +181,12 @@
         });
 
         if (response.ok) {
-          mensaje.innerText = "✅ ¡Puerta abierta!";
+          mensaje.innerText = textos[idiomaActual].abierto;
         } else {
-          mensaje.innerText = "❌ No se pudo abrir.";
+          mensaje.innerText = textos[idiomaActual].error;
         }
       } catch (error) {
-        mensaje.innerText = "⚠️ Error de conexión.";
+        mensaje.innerText = textos[idiomaActual].conexion;
       }
 
       setTimeout(() => {
@@ -166,29 +196,14 @@
     }
 
     function cambiarIdioma() {
-      const idioma = document.getElementById("lang").value;
-      const textos = {
-        es: {
-          titulo: "Para abrir el Portal",
-          paso1: "Llama al 1ºF en el portal del Edificio Caracola",
-          paso2: "Tras llamar, pulsa el botón \"Abrir Puerta\"",
-          direccion: "Dirección en Google Maps:",
-          boton: "Abrir Puerta"
-        },
-        en: {
-          titulo: "To open the gate",
-          paso1: "Call 1ºF at the entrance of Edificio Caracola",
-          paso2: "After calling, press the \"Open Gate\" button",
-          direccion: "Address on Google Maps:",
-          boton: "Open Gate"
-        }
-      };
+      idiomaActual = document.getElementById("lang").value;
 
-      document.getElementById("titulo").innerText = textos[idioma].titulo;
-      document.getElementById("paso1").innerText = textos[idioma].paso1;
-      document.getElementById("paso2").innerText = textos[idioma].paso2;
-      document.getElementById("direccionTitulo").innerText = textos[idioma].direccion;
-      document.getElementById("abrirBtn").innerText = textos[idioma].boton;
+      document.getElementById("bienvenida").innerHTML = textos[idiomaActual].bienvenida;
+      document.getElementById("titulo").innerText = textos[idiomaActual].titulo;
+      document.getElementById("paso1").innerText = textos[idiomaActual].paso1;
+      document.getElementById("paso2").innerText = textos[idiomaActual].paso2;
+      document.getElementById("direccionTitulo").innerText = textos[idiomaActual].direccion;
+      document.getElementById("abrirBtn").innerText = textos[idiomaActual].boton;
     }
   </script>
 </body>
