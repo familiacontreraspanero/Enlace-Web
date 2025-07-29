@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Abrir Puerta del Portal</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      text-align: center;
+      padding: 50px 20px;
+      color: #333;
+      max-width: 500px;
+      margin: auto;
+    }
+    #welcome {
+      font-size: 18px;
+      margin-bottom: 15px;
+    }
+    #welcome a {
+      color: #0077cc;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    #welcome a:hover {
+      text-decoration: underline;
+    }
+    #titulo-principal {
+      font-size: 28px;
+      margin-bottom: 25px;
+      font-weight: bold;
+    }
+    .instrucciones {
+      font-size: 16px;
+      color: #222;
+      margin: 0 auto 25px auto;
+      max-width: 350px;
+      text-align: center;
+      line-height: 1.4em;
+    }
+    .instrucciones p {
+      margin: 8px 0;
+    }
+    button {
+      font-size: 22px;
+      padding: 15px 40px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-bottom: 30px;
+    }
+    button:disabled {
+      background-color: #a0a0a0;
+      cursor: not-allowed;
+    }
+    #respuesta {
+      font-weight: bold;
+      margin-bottom: 30px;
+      min-height: 22px;
+    }
+    .direccion-titulo {
+      font-weight: bold;
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+    .direccion a {
+      color:#0077cc;
+      text-decoration:none;
+      font-size: 14px;
+    }
+    .direccion a:hover {
+      text-decoration: underline;
+    }
+    #lang-select {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <select id="lang-select" onchange="cambiarIdioma()">
+    <option value="es">ES</option>
+    <option value="en">EN</option>
+  </select>
+
+  <div id="welcome">
+    Bienvenido al <a id="booking-link" href="https://www.booking.com/hotel/es/sweet-apartment-malaga12.es.html" target="_blank" rel="noopener noreferrer">Sweet Apartment</a>
+  </div>
+
+  <div id="titulo-principal">Para abrir el Portal</div>
+
+  <div class="instrucciones">
+    <p id="instruccion1">1. Llama al 1ºF en el portal del Edificio Caracola</p>
+    <p id="instruccion2">2. Tras llamar, pulsa el botón "Abrir Puerta"</p>
+  </div>
+
+  <button id="abrirBtn" onclick="abrirPuerta()">Abrir Puerta</button>
+
+  <div id="respuesta"></div>
+
+  <div class="direccion-titulo" id="direccion-titulo">Dirección en Google Maps:</div>
+  <div class="direccion">
+    <a id="mapa-link" href="https://maps.app.goo.gl/dbK9AqANUYsq5zmJA" target="_blank" rel="noopener noreferrer">
+      Calle Doña de Tolosa 2, 1ºF (Edificio Caracola)
+    </a>
+  </div>
+
+  <script>
+    const textos = {
+      es: {
+        welcome: 'Bienvenido al <a href="https://www.booking.com/hotel/es/sweet-apartment-malaga12.es.html" target="_blank" rel="noopener noreferrer">Sweet Apartment</a>',
+        titulo_principal: "Para abrir el Portal",
+        instruccion1: "1. Llama al 1ºF en el portal del Edificio Caracola",
+        instruccion2: "2. Tras llamar, pulsa el botón \"Abrir Puerta\"",
+        boton: "Abrir Puerta",
+        respuesta_enviando: "🔄 Enviando orden...",
+        respuesta_exito: "✅ ¡Puerta abierta!",
+        respuesta_error: "❌ No se pudo abrir.",
+        respuesta_error_conexion: "⚠️ Error de conexión.",
+        direccion_titulo: "Dirección en Google Maps:",
+        mapa_texto: "Calle Doña de Tolosa 2, 1ºF (Edificio Caracola)"
+      },
+      en: {
+        welcome: 'Welcome to <a href="https://www.booking.com/hotel/es/sweet-apartment-malaga12.es.html" target="_blank" rel="noopener noreferrer">Sweet Apartment</a>',
+        titulo_principal: "To open the Gate",
+        instruccion1: "1. Call 1ºF at the portal of Edificio Caracola",
+        instruccion2: "2. After calling, press the \"Open Gate\" button",
+        boton: "Open Gate",
+        respuesta_enviando: "🔄 Sending command...",
+        respuesta_exito: "✅ Gate opened!",
+        respuesta_error: "❌ Could not open.",
+        respuesta_error_conexion: "⚠️ Connection error.",
+        direccion_titulo: "Address on Google Maps:",
+        mapa_texto: "Calle Doña de Tolosa 2, 1ºF (Edificio Caracola)"
+      }
+    };
+
+    function cambiarIdioma() {
+      const idioma = document.getElementById("lang-select").value;
+      document.getElementById("welcome").innerHTML = textos[idioma].welcome;
+      document.getElementById("titulo-principal").innerText = textos[idioma].titulo_principal;
+      document.getElementById("instruccion1").innerText = textos[idioma].instruccion1;
+      document.getElementById("instruccion2").innerText = textos[idioma].instruccion2;
+      document.getElementById("abrirBtn").innerText = textos[idioma].boton;
+      document.getElementById("direccion-titulo").innerText = textos[idioma].direccion_titulo;
+      document.getElementById("mapa-link").innerText = textos[idioma].mapa_texto;
+    }
+
+    async function abrirPuerta() {
+      const idioma = document.getElementById("lang-select").value;
+      const token = "f81f953fab1d52ce7a6d264464d55aefcdbdda02e51282e19b5c2d5b97d3fd287181dcde09b601b6";
+      const smartlockId = 9634589714;
+
+      const boton = document.getElementById("abrirBtn");
+      const mensaje = document.getElementById("respuesta");
+
+      boton.disabled = true;
+      boton.style.backgroundColor = "#a0a0a0";
+      mensaje.innerText = textos[idioma].respuesta_enviando;
+
+      try {
+        const response = await fetch("https://nuki-opener-arkm.vercel.app/api/abrir", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ token, smartlockId })
+        });
+
+        if (response.ok) {
+          mensaje.innerText = textos[idioma].respuesta_exito;
+        } else {
+          mensaje.innerText = textos[idioma].respuesta_error;
+        }
+      } catch (error) {
+        mensaje.innerText = textos[idioma].respuesta_error_conexion;
+      }
+
+      setTimeout(() => {
+        boton.disabled = false;
+        boton.style.backgroundColor = "#28a745";
+      }, 3000);
+    }
+
+    window.onload = cambiarIdioma;
+  </script>
+</body>
+</html>
