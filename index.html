@@ -47,7 +47,7 @@
       border-radius: 10px;
       cursor: pointer;
       transition: background-color 0.3s ease;
-      margin-top: 20px;
+      margin-top: 10px;
       width: 100%;
       max-width: 300px;
     }
@@ -119,11 +119,11 @@
 
     <h1 id="titulo">Para abrir el Portal</h1>
 
-    <p id="paso1">Llama al 1ºF en el portal del Edificio Caracola</p>
-    <p id="paso2">Tras llamar, pulsa el botón "Abrir Puerta"</p>
-
+    <p id="paso1">1) Primero, pulsa el botón "Abrir Puerta"</p>
     <button id="abrirBtn" onclick="abrirPuerta()">Abrir Puerta</button>
     <div id="respuesta"></div>
+
+    <p id="paso2">2) Llama al 1ºF en el portal del Edificio Caracola. Tras unos segundos, la puerta se abrirá automáticamente.</p>
 
     <h2 id="direccionTitulo">Dirección en Google Maps:</h2>
     <div class="direccion">
@@ -143,24 +143,24 @@
       es: {
         bienvenida: 'Bienvenido al <a href="https://www.booking.com/hotel/es/sweet-apartment-malaga12.es.html" target="_blank">Sweet Apartment</a>',
         titulo: "Para abrir el Portal",
-        paso1: "Llama al 1ºF en el portal del Edificio Caracola",
-        paso2: 'Tras llamar, pulsa el botón "Abrir Puerta"',
+        paso1: '1) Primero, pulsa el botón "Abrir Puerta"',
+        paso2: "2) Llama al 1ºF en el portal del Edificio Caracola. Tras unos segundos, la puerta se abrirá automáticamente.",
         direccion: "Dirección en Google Maps:",
         boton: "Abrir Puerta",
         enviando: "🔄 Enviando orden...",
-        abierto: "✅ ¡Puerta abierta!",
+        abierto: "✅ ¡Puerta esperando a que llames!",
         error: "❌ No se pudo abrir. Contacta con +34639413602",
         conexion: "⚠️ Error de conexión."
       },
       en: {
         bienvenida: 'Welcome to <a href="https://www.booking.com/hotel/es/sweet-apartment-malaga12.en.html" target="_blank">Sweet Apartment</a>',
         titulo: "To open the gate",
-        paso1: "Call 1ºF at the entrance of Edificio Caracola",
-        paso2: 'After calling, press the "Open Gate" button',
+        paso1: '1) First, press the "Open Gate" button',
+        paso2: "2) Then ring 1ºF at the entrance of Edificio Caracola. After a few seconds, the gate will open automatically.",
         direccion: "Address on Google Maps:",
         boton: "Open Gate",
         enviando: "🔄 Sending request...",
-        abierto: "✅ Gate opened!",
+        abierto: "✅ Door waiting for you to ring!",
         error: "❌ Could not open. Reach out +34639413602",
         conexion: "⚠️ Connection error."
       }
